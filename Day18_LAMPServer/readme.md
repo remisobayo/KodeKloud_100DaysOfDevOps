@@ -1,11 +1,11 @@
 # Day 18 - Configuring LAMP Server
-# 11/09/2025 - Those who hoard gold have riches for a moment.
-# Those who hoard knowledge and skills have riches for a lifetime. – The Diary of a CEO
+- 11/09/2025 - 
+Those who hoard gold have riches for a moment. Those who hoard knowledge and skills have riches for a lifetime. – The Diary of a CEO
 
 LAMP Server is a classic open source web service stack. The acronym LAMP stands for Linux Apache MySQL/MariaDB PHP/Perl/Python.
 
-
 They have already done infrastructure configuration—for example, on the storage server they already have a shared directory /vaw/www/html that is mounted on each app host under /var/www/html directory. Please perform the following steps to accomplish the task:
+
 a. Install httpd, php and its dependencies on all app hosts - stapp01, 
 ```bash
 ssh tony@stapp01;
