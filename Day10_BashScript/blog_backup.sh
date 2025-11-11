@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-
 # a. Create a zip archive named xfusioncorp_blog.zip of /var/www/html/blog directory.
 # b. save the archive in /backup/ location
 cd /backup
