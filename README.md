@@ -34,7 +34,33 @@ Day 18: Configure a LAMP Server
  - This activity involves configuring a Linux, Apache, MySQL/MariaDB, PHP/Python/Perl. I had 3 application servers hosting my PHP application on Apache Web server running on port 6200 and connecting to 1 database server - MariaDB on port 3306. A Load Balancer LBR routes ingress traffic in a round robbing manner to the 3 app servers using HAProxy configured on the LBR server. The LBR servers http/https traffic coming from port 80 and 443 and routes them to the backend app servers.
 
 
-Day 19: 
+Day 19: Install and Configure Web Applications
+- 
+
+
+
+Day 20:
+
+
+
+
+Day 21: Set Up Git Repository on Storage Server
+Working with Git. Install git and setup a version control repository using 'git init' command
+
+Day 22: Clone Git Repository on Storage Server
+Use 'git clone' to copy a git repository into another directory.
+
+Day 23: Fork a Git Repository
+Using the Version Control System UI, make a copy of an existing repo
+
+Day 24: Git Create Branches
+When checking out a branch, you are doing a copy of the current branch.
+Most times make sure you are on the master branch before doing git checkout -b <new branch name>
+
+Day 25: Git Merge Branches
+
+
+Day 31: Git Stash
 
 
 
