@@ -1,0 +1,55 @@
+# Use Ubuntu 24.04 (Noble Numbat) as base image
+FROM ubuntu:24.04
+
+# Set environment variables to avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+ENV APACHE_RUN_USER=www-data
+ENV APACHE_RUN_GROUP=www-data
+ENV APACHE_LOG_DIR=/var/log/apache2
+ENV APACHE_PID_FILE=/var/run/apache2/apache2.pid
+ENV APACHE_RUN_DIR=/var/run/apache2
+ENV APACHE_LOCK_DIR=/var/lock/apache2
+
+# Update package list and install Apache2
+RUN apt-get update && \
+    apt-get install -y \
+    apache2 \
+    curl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Change Apache2 to listen on port 6100 instead of 80
+RUN sed -i 's/Listen 80/Listen 6100/' /etc/apache2/ports.conf && \
+    sed -i 's/<VirtualHost \*:80>/<VirtualHost \*:6100>/' /etc/apache2/sites-available/000-default.conf
+
+# Modify default Apache configuration to use port 6100
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+# Enable necessary Apache modules
+RUN a2enmod rewrite && \
+    a2enmod headers
+
+# Create a simple test page
+RUN echo "<!DOCTYPE html>" > /var/www/html/index.html && \
+    echo "<html>" >> /var/www/html/index.html && \
+    echo "<head><title>Apache on Docker</title></head>" >> /var/www/html/index.html && \
+    echo "<body>" >> /var/www/html/index.html && \
+    echo "<h1>Apache2 is running on Ubuntu 24.04</h1>" >> /var/www/html/index.html && \
+    echo "<p>Server is configured to run on port 6100</p>" >> /var/www/html/index.html && \
+    echo "<p>Current time: $(date)</p>" >> /var/www/html/index.html && \
+    echo "</body>" >> /var/www/html/index.html && \
+    echo "</html>" >> /var/www/html/index.html
+
+# Set proper permissions
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
+
+# Expose port 6100
+EXPOSE 6100
+
+# Health check to verify Apache is running
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:6100/ || exit 1
+
+# Start Apache in foreground mode
+CMD ["apache2ctl", "-D", "FOREGROUND"]
