@@ -1,0 +1,18 @@
+# version: '3.8'
+services:
+  web:
+    image: httpd:latest
+    container_name: httpd
+    ports:
+      - "3002:80"
+    volumes:
+      # Bind mount (host:container)
+      - /opt/finance:/usr/local/apache2/htdocs
+    restart: unless-stopped
+    # Optional: Add health check
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 40s
