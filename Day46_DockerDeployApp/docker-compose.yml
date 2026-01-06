@@ -1,0 +1,32 @@
+services:
+  php_host:
+    image: php:8.2-apache
+    container_name: php_host
+    ports:
+      - "3004:80"
+    volumes:
+      # Bind mount (host:container)
+      - /var/www/html:/var/www/html
+    restart: unless-stopped
+    depends_on:
+      - mysql_host
+    environment:
+      - DB_HOST=mysql_host
+      - DB_NAME=database_host
+      - DB_USER=app_user
+      - DB_PASSWORD=${DB_PASSWORD}
+  mysql_host:
+    image: mariadb:latest
+    container_name: mysql_host
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=database_host
+      - MYSQL_USER=app_user
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      # environment variables saved in .env file in the same directory
+    
