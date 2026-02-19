@@ -127,8 +127,9 @@ Pod Template:
   Volumes:      <none>
   Node-Selectors:       <none>
   Tolerations:  <none>
+```
 
-
+```text
   thor@jumphost ~$ kubectl rollout history deployment/nginx-deployment --revision=2
 deployment.apps/nginx-deployment with revision #2
 Pod Template:
