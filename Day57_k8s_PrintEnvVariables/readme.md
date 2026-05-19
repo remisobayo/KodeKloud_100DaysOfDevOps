@@ -1,7 +1,7 @@
 
 
 -- 05/19/2026
-- Day 57: Print Environment Variables
+- Day 57 - Print Environment Variables
 
 - If you can't explain it simply you don't understand it well enough.
 – Albert Einstein
