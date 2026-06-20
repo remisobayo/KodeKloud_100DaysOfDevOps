@@ -51,7 +51,7 @@ curl -Lk https://10.22.0.10:6379
 
 
 ```text
-The configmap name and the image name was incorrect. The errors can be seen in the events shown in describe pod command.
+The configmap name and the image name was incorrect in the deloyment. The errors can be seen in the events shown in describe pod command. To solve this we need to edit the deployment or replace it.
 
 
 thor@jump-host ~$ k get deployment
