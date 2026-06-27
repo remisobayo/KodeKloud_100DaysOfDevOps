@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ic-devops
+  name: ic-deploy-devops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ic-devops
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ic-devops
+    spec:
+      volumes:
+        - name: ic-volume-devops
+          emptyDir: {}
+      containers:
+      - image: debian:latest
+        name: ic-main-devops
+        command: ['/bin/bash', '-c', 'while true; do cat /ic/blog; sleep 5; done']
+        volumeMounts:
+          - name: ic-volume-devops
+            mountPath: /ic
+        resources: {}
+      initContainers:
+      - image: debian:latest
+        name: ic-msg-devops
+        command: ['/bin/bash', '-c', 'echo Init Done - Welcome to xFusionCorp Industries > /ic/blog']
+        volumeMounts:
+          - name: ic-volume-devops
+            mountPath: /ic
+        resources: {}
+status: {}
